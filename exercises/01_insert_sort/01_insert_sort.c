@@ -8,7 +8,6 @@ typedef struct {
 } Student;
 
 void insertion_sort(Student students[], int n) {
-    // TODO: 在这里添加你的代码
     int i,j;
     Student temp;
     for(i=1;i<n;i++){
@@ -18,8 +17,6 @@ void insertion_sort(Student students[], int n) {
         }
         students[j+1]=temp;
     }
-    
-    // I AM NOT DONE
 }
 
 int main(void) {
