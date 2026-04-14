@@ -12,9 +12,26 @@ typedef struct {
 
 Student students[MAX_STUDENTS];
 
+int partition(int left,int right){
+    int i=left,j=right;
+    int p;
+    Student pivot=students[left];
+    while(i<j){
+        while(students[j].score<=pivot.score&&j>i)j--;
+        if(j>i)students[i++]=students[j];
+        while(students[i].score>pivot.score&&i<j)i++;
+        if(i<j)students[j--]=students[i];
+    }
+    students[i]=pivot;
+    return i;
+}
+
 void quick_sort(int left, int right) {
-    // TODO: 在这里添加你的代码
-    // I AM NOT DONE
+    if(left<right){
+        int p=partition(left,right);
+        quick_sort(left,p);
+        quick_sort(p+1,right);
+    }
 }
 
 int main(void) {
