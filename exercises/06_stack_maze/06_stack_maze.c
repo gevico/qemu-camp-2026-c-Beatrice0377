@@ -40,32 +40,33 @@ int main(void)
 		int r=stack[top].row;
 		int c=stack[top].col;
 		if(r==end_r&&c==end_c){
-			for(int i=0;i<=top;i++){
-				printf("(%d,%d)\n",stack[i].row,stack[i].col);
+			for(int i=top;i>=0;i--){
+				printf("(%d, %d)\n",stack[i].row,stack[i].col);
 			}
 			return 0;
 		}
-		else if(r<MAX_ROW&&c<MAX_COL&&maze[r][c]==0){
-			maze[r][c]=2;
-			push(r,c);
-		}
-		else if(r<MAX_ROW&&c+1<MAX_COL&&maze[r][c+1]==0){
-			maze[r][c+1]=2;
-			push(r,c+1);
-		}
-		else if(r+1<MAX_ROW&&c<MAX_COL&&maze[r+1][c]==0){
-			maze[r+1][c]=2;
-			push(r+1,c);
-		}
-		else if(r-1>=0&&c<MAX_COL&&maze[r-1][c]==0){
-			maze[r-1][c]=2;
-			push(r-1,c);
-		}
-		else if(r<MAX_ROW&&c-1>=0&&maze[r][c-1]==0){
-			maze[r][c-1]=2;
-			push(r,c-1);
-		}
-		else pop();
+        if (r - 1 >= 0 && maze[r - 1][c] == 0) {
+            maze[r - 1][c] = 2;
+            push(r - 1, c);
+        }
+        // 2. 其次 向左 (c - 1)
+        else if (c - 1 >= 0 && maze[r][c - 1] == 0) {
+            maze[r][c - 1] = 2;
+            push(r, c - 1);
+        }
+        // 3. 再次 向下 (r + 1)
+        else if (r + 1 < MAX_ROW && maze[r + 1][c] == 0) {
+            maze[r + 1][c] = 2;
+            push(r + 1, c);
+        }
+        // 4. 最后 向右 (c + 1)
+        else if (c + 1 < MAX_COL && maze[r][c + 1] == 0) {
+            maze[r][c + 1] = 2;
+            push(r, c + 1);
+        }
+        else {
+            pop();
+        }
 	}
 	printf("No path!\n");
 	return 0;
